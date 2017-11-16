@@ -1,0 +1,1010 @@
+{
+  "contractName": "FeverContract",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "increaseTemp",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "decreaseTemp",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "hasFever",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTemperature",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b6000805460ff191660621790556101868061002b6000396000f3006060604052600436106100615763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663154c34e98114610066578063267302b31461008f578063510be825146100a25780636421d04b146100c9575b600080fd5b341561007157600080fd5b6100796100dc565b60405160ff909116815260200160405180910390f35b341561009a57600080fd5b61007961010f565b34156100ad57600080fd5b6100b5610143565b604051901515815260200160405180910390f35b34156100d457600080fd5b610079610151565b60008054606e60ff90911611156100f257600080fd5b506000805460ff198116600160ff92831601821617918290551690565b60008054605f60ff909116101561012557600080fd5b506000805460ff19811660ff91821660001901821617918290551690565b600054606460ff9091161190565b60005460ff16905600a165627a7a72305820fc21acc6efdc9ab0eb0e44bcf672729f2f9e87d3a3cbe4fb1d126bb52cb9dd710029",
+  "deployedBytecode": "0x6060604052600436106100615763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663154c34e98114610066578063267302b31461008f578063510be825146100a25780636421d04b146100c9575b600080fd5b341561007157600080fd5b6100796100dc565b60405160ff909116815260200160405180910390f35b341561009a57600080fd5b61007961010f565b34156100ad57600080fd5b6100b5610143565b604051901515815260200160405180910390f35b34156100d457600080fd5b610079610151565b60008054606e60ff90911611156100f257600080fd5b506000805460ff198116600160ff92831601821617918290551690565b60008054605f60ff909116101561012557600080fd5b506000805460ff19811660ff91821660001901821617918290551690565b600054606460ff9091161190565b60005460ff16905600a165627a7a72305820fc21acc6efdc9ab0eb0e44bcf672729f2f9e87d3a3cbe4fb1d126bb52cb9dd710029",
+  "sourceMap": "26:558:0:-;;;76:52;;;;;;;;107:11;:16;;-1:-1:-1;;107:16:0;121:2;107:16;;;26:558;;;;;;",
+  "deployedSourceMap": "26:558:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;310:135;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;448:134;;;;;;;;;;;;221:86;;;;;;;;;;;;;;;;;;;;;;;;;;;;;131:87;;;;;;;;;;;;310:135;350:5;367:11;;381:3;367:11;;;;:17;363:31;;;386:8;;;363:31;-1:-1:-1;400:11:0;:16;;-1:-1:-1;;400:16:0;;415:1;400:16;;;;;;;;;;;;429:11;;310:135::o;448:134::-;488:5;505:11;;519:2;505:11;;;;:16;501:30;;;523:8;;;501:30;-1:-1:-1;537:11:0;:16;;-1:-1:-1;;537:16:0;;;;;;-1:-1:-1;;537:16:0;;;;;;;;566:11;;448:134::o;221:86::-;266:4;285:11;299:3;285:11;;;;:17;221:86;:::o;131:87::-;182:5;202:11;;;131:87;:::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract FeverContract {\n\n  uint8 temperature;\n\n  function FeverContract() {\n    temperature = 98;\n  }\n  function getTemperature () public constant returns(uint8) {\n    return temperature;\n  }\n  function hasFever () public constant returns(bool) {\n    return temperature > 100;\n  }\n  function increaseTemp () public returns(uint8) {\n    if (temperature > 110) revert();\n    temperature += 1;\n    return temperature;\n  }\n  function decreaseTemp () public returns(uint8) {\n    if (temperature < 95) revert();\n    temperature -= 1;\n    return temperature;\n  }\n}\n",
+  "sourcePath": "/Users/billy/Documents/htdocs/dapp-scratch-fever/dapp-scratch-fever/contracts/FeverContract.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/billy/Documents/htdocs/dapp-scratch-fever/dapp-scratch-fever/contracts/FeverContract.sol",
+      "exportedSymbols": {
+        "FeverContract": [
+          68
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".17"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            68
+          ],
+          "name": "FeverContract",
+          "scope": 69
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "name": "temperature",
+              "scope": 68,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint8",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint8",
+                  "type": "uint8"
+                },
+                "id": 2,
+                "name": "ElementaryTypeName",
+                "src": "54:5:0"
+              }
+            ],
+            "id": 3,
+            "name": "VariableDeclaration",
+            "src": "54:17:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "FeverContract",
+              "payable": false,
+              "scope": 68,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 4,
+                "name": "ParameterList",
+                "src": "98:2:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 5,
+                "name": "ParameterList",
+                "src": "101:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "uint8",
+                              "value": "temperature"
+                            },
+                            "id": 6,
+                            "name": "Identifier",
+                            "src": "107:11:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "3938",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 98",
+                              "value": "98"
+                            },
+                            "id": 7,
+                            "name": "Literal",
+                            "src": "121:2:0"
+                          }
+                        ],
+                        "id": 8,
+                        "name": "Assignment",
+                        "src": "107:16:0"
+                      }
+                    ],
+                    "id": 9,
+                    "name": "ExpressionStatement",
+                    "src": "107:16:0"
+                  }
+                ],
+                "id": 10,
+                "name": "Block",
+                "src": "101:27:0"
+              }
+            ],
+            "id": 11,
+            "name": "FunctionDefinition",
+            "src": "76:52:0"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "getTemperature",
+              "payable": false,
+              "scope": 68,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 12,
+                "name": "ParameterList",
+                "src": "155:2:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 19,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint8",
+                          "type": "uint8"
+                        },
+                        "id": 13,
+                        "name": "ElementaryTypeName",
+                        "src": "182:5:0"
+                      }
+                    ],
+                    "id": 14,
+                    "name": "VariableDeclaration",
+                    "src": "182:5:0"
+                  }
+                ],
+                "id": 15,
+                "name": "ParameterList",
+                "src": "181:7:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 15
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "overloadedDeclarations": [
+                            null
+                          ],
+                          "referencedDeclaration": 3,
+                          "type": "uint8",
+                          "value": "temperature"
+                        },
+                        "id": 16,
+                        "name": "Identifier",
+                        "src": "202:11:0"
+                      }
+                    ],
+                    "id": 17,
+                    "name": "Return",
+                    "src": "195:18:0"
+                  }
+                ],
+                "id": 18,
+                "name": "Block",
+                "src": "189:29:0"
+              }
+            ],
+            "id": 19,
+            "name": "FunctionDefinition",
+            "src": "131:87:0"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "hasFever",
+              "payable": false,
+              "scope": 68,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 20,
+                "name": "ParameterList",
+                "src": "239:2:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 29,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 21,
+                        "name": "ElementaryTypeName",
+                        "src": "266:4:0"
+                      }
+                    ],
+                    "id": 22,
+                    "name": "VariableDeclaration",
+                    "src": "266:4:0"
+                  }
+                ],
+                "id": 23,
+                "name": "ParameterList",
+                "src": "265:6:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 23
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint8",
+                            "typeString": "uint8"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": ">",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "uint8",
+                              "value": "temperature"
+                            },
+                            "id": 24,
+                            "name": "Identifier",
+                            "src": "285:11:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "313030",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 100",
+                              "value": "100"
+                            },
+                            "id": 25,
+                            "name": "Literal",
+                            "src": "299:3:0"
+                          }
+                        ],
+                        "id": 26,
+                        "name": "BinaryOperation",
+                        "src": "285:17:0"
+                      }
+                    ],
+                    "id": 27,
+                    "name": "Return",
+                    "src": "278:24:0"
+                  }
+                ],
+                "id": 28,
+                "name": "Block",
+                "src": "272:35:0"
+              }
+            ],
+            "id": 29,
+            "name": "FunctionDefinition",
+            "src": "221:86:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "increaseTemp",
+              "payable": false,
+              "scope": 68,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 30,
+                "name": "ParameterList",
+                "src": "332:2:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 48,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint8",
+                          "type": "uint8"
+                        },
+                        "id": 31,
+                        "name": "ElementaryTypeName",
+                        "src": "350:5:0"
+                      }
+                    ],
+                    "id": 32,
+                    "name": "VariableDeclaration",
+                    "src": "350:5:0"
+                  }
+                ],
+                "id": 33,
+                "name": "ParameterList",
+                "src": "349:7:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "falseBody": null
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint8",
+                            "typeString": "uint8"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": ">",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "uint8",
+                              "value": "temperature"
+                            },
+                            "id": 34,
+                            "name": "Identifier",
+                            "src": "367:11:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "313130",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 110",
+                              "value": "110"
+                            },
+                            "id": 35,
+                            "name": "Literal",
+                            "src": "381:3:0"
+                          }
+                        ],
+                        "id": 36,
+                        "name": "BinaryOperation",
+                        "src": "367:17:0"
+                      },
+                      {
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "arguments": [
+                                null
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "tuple()",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    null
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 141,
+                                  "type": "function () pure",
+                                  "value": "revert"
+                                },
+                                "id": 37,
+                                "name": "Identifier",
+                                "src": "386:6:0"
+                              }
+                            ],
+                            "id": 38,
+                            "name": "FunctionCall",
+                            "src": "386:8:0"
+                          }
+                        ],
+                        "id": 39,
+                        "name": "ExpressionStatement",
+                        "src": "386:8:0"
+                      }
+                    ],
+                    "id": 40,
+                    "name": "IfStatement",
+                    "src": "363:31:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "+=",
+                          "type": "uint8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "uint8",
+                              "value": "temperature"
+                            },
+                            "id": 41,
+                            "name": "Identifier",
+                            "src": "400:11:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "31",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 1",
+                              "value": "1"
+                            },
+                            "id": 42,
+                            "name": "Literal",
+                            "src": "415:1:0"
+                          }
+                        ],
+                        "id": 43,
+                        "name": "Assignment",
+                        "src": "400:16:0"
+                      }
+                    ],
+                    "id": 44,
+                    "name": "ExpressionStatement",
+                    "src": "400:16:0"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 33
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "overloadedDeclarations": [
+                            null
+                          ],
+                          "referencedDeclaration": 3,
+                          "type": "uint8",
+                          "value": "temperature"
+                        },
+                        "id": 45,
+                        "name": "Identifier",
+                        "src": "429:11:0"
+                      }
+                    ],
+                    "id": 46,
+                    "name": "Return",
+                    "src": "422:18:0"
+                  }
+                ],
+                "id": 47,
+                "name": "Block",
+                "src": "357:88:0"
+              }
+            ],
+            "id": 48,
+            "name": "FunctionDefinition",
+            "src": "310:135:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "decreaseTemp",
+              "payable": false,
+              "scope": 68,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 49,
+                "name": "ParameterList",
+                "src": "470:2:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 67,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint8",
+                          "type": "uint8"
+                        },
+                        "id": 50,
+                        "name": "ElementaryTypeName",
+                        "src": "488:5:0"
+                      }
+                    ],
+                    "id": 51,
+                    "name": "VariableDeclaration",
+                    "src": "488:5:0"
+                  }
+                ],
+                "id": 52,
+                "name": "ParameterList",
+                "src": "487:7:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "falseBody": null
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint8",
+                            "typeString": "uint8"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "<",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "uint8",
+                              "value": "temperature"
+                            },
+                            "id": 53,
+                            "name": "Identifier",
+                            "src": "505:11:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "3935",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 95",
+                              "value": "95"
+                            },
+                            "id": 54,
+                            "name": "Literal",
+                            "src": "519:2:0"
+                          }
+                        ],
+                        "id": 55,
+                        "name": "BinaryOperation",
+                        "src": "505:16:0"
+                      },
+                      {
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "arguments": [
+                                null
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "tuple()",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    null
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 141,
+                                  "type": "function () pure",
+                                  "value": "revert"
+                                },
+                                "id": 56,
+                                "name": "Identifier",
+                                "src": "523:6:0"
+                              }
+                            ],
+                            "id": 57,
+                            "name": "FunctionCall",
+                            "src": "523:8:0"
+                          }
+                        ],
+                        "id": 58,
+                        "name": "ExpressionStatement",
+                        "src": "523:8:0"
+                      }
+                    ],
+                    "id": 59,
+                    "name": "IfStatement",
+                    "src": "501:30:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "-=",
+                          "type": "uint8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "uint8",
+                              "value": "temperature"
+                            },
+                            "id": 60,
+                            "name": "Identifier",
+                            "src": "537:11:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "31",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 1",
+                              "value": "1"
+                            },
+                            "id": 61,
+                            "name": "Literal",
+                            "src": "552:1:0"
+                          }
+                        ],
+                        "id": 62,
+                        "name": "Assignment",
+                        "src": "537:16:0"
+                      }
+                    ],
+                    "id": 63,
+                    "name": "ExpressionStatement",
+                    "src": "537:16:0"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 52
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "overloadedDeclarations": [
+                            null
+                          ],
+                          "referencedDeclaration": 3,
+                          "type": "uint8",
+                          "value": "temperature"
+                        },
+                        "id": 64,
+                        "name": "Identifier",
+                        "src": "566:11:0"
+                      }
+                    ],
+                    "id": 65,
+                    "name": "Return",
+                    "src": "559:18:0"
+                  }
+                ],
+                "id": 66,
+                "name": "Block",
+                "src": "495:87:0"
+              }
+            ],
+            "id": 67,
+            "name": "FunctionDefinition",
+            "src": "448:134:0"
+          }
+        ],
+        "id": 68,
+        "name": "ContractDefinition",
+        "src": "26:558:0"
+      }
+    ],
+    "id": 69,
+    "name": "SourceUnit",
+    "src": "0:585:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {
+    "4447": {
+      "events": {},
+      "links": {},
+      "address": "0x345ca3e014aaf5dca488057592ee47305d9b3e10"
+    }
+  },
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2017-11-16T09:03:47.163Z"
+}
