@@ -34,7 +34,6 @@ export default {
     checkTemp () {
       return feverContract.hasFever().then((hasFever) => {
         this.hasFever = hasFever
-
         return feverContract.getTemperature().then((temp) => {
           this.temp = temp
         })

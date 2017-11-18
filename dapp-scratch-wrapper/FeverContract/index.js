@@ -2,7 +2,7 @@
 import FeverContractArtifacts from '../../build/contracts/FeverContract.json'
 
 import Web3 from 'web3'
-import BN from 'bignumber.js'
+const BN = Web3.utils.BN
 import ZeroClientProvider from 'web3-provider-engine/zero.js'
 import IdManagerProvider from '@aeternity/id-manager-provider'
 
@@ -47,41 +47,43 @@ class FeverContract {
         skipSecurity: true
       })
 
-      // check for aedentity app
-      if (idManager.checkIdManager()) {
-        web3Provider = idManager.web3.currentProvider
+      idManager.checkIdManager().then((idManagerPresent)=>{
+				// check for aedentity app
+        if (idManagerPresent) {
+          web3Provider = idManager.web3.currentProvider
 
-      // check for metamask
-      } else if (global.web3) {
-        web3Provider = web3.currentProvider
+          // check for metamask
+        } else if (global.web3) {
+          web3Provider = web3.currentProvider
 
-      // attempt to try again if no aedentity app or metamask
-      } else if (this.options.connectionRetries > 0){
-        this.options.connectionRetries -= 1
-        setTimeout(() => {
-          this.initWeb3().then(resolve).catch((error) => {
-            reject(new Error(error))
+          // attempt to try again if no aedentity app or metamask
+        } else if (this.options.connectionRetries > 0){
+          this.options.connectionRetries -= 1
+          setTimeout(() => {
+            this.initWeb3().then(resolve).catch((error) => {
+              reject(new Error(error))
+            })
+          }, 1000)
+          // revert to a read only version using infura endpoint
+        } else {
+          this.readOnly = true
+          web3Provider = ZeroClientProvider({
+            getAccounts: function(){},
+            rpcUrl: 'https://mainnet.infura.io',
+            // rpcUrl: 'https://testnet.infura.io',
+            // rpcUrl: 'https://rinkeby.infura.io',
+            // rpcUrl: 'https://kovan.infura.io',
           })
-        }, 1000)
-      // revert to a read only version using infura endpoint
-      } else {
-        this.readOnly = true
-        web3Provider = ZeroClientProvider({
-          getAccounts: function(){},
-          rpcUrl: 'https://mainnet.infura.io',
-          // rpcUrl: 'https://testnet.infura.io',
-          // rpcUrl: 'https://rinkeby.infura.io',
-          // rpcUrl: 'https://kovan.infura.io',
-        })
-      }
+        }
 
-      if (web3Provider) {
-        web3 = new Web3(web3Provider)
-        this.startChecking()
+        if (web3Provider) {
+          web3 = new Web3(web3Provider)
+          this.startChecking()
 
-        if (this.options.getPastEvents) this.getPastEvents()
-        if (this.options.watchFutureEvents) this.watchFutureEvents()
-      }
+          if (this.options.getPastEvents) this.getPastEvents()
+          if (this.options.watchFutureEvents) this.watchFutureEvents()
+        }
+      })
     })
   }
 
@@ -120,7 +122,7 @@ class FeverContract {
   }
 
   deployContract () {
-    if (!this.address) return new Error('Please provide a contract address')
+    if (!this.address || this.address === 'REPLACE_WITH_CONTRACT_ADDRESS') return new Error('Please provide a contract address')
     this.FeverContract = new global.web3.eth.Contract(FeverContractArtifacts.abi, this.address)
   }
 
@@ -170,7 +172,8 @@ class FeverContract {
    */
 
   hasFever () {
-    return this.FeverContract.methods.hasFever().call()    .then((resp) => {
+    return this.FeverContract.methods.hasFever().call()
+      .then((resp) => {
       console.log(resp)
       return resp
     }).catch((err) => {
@@ -178,7 +181,8 @@ class FeverContract {
     })
   }
   getTemperature () {
-    return this.FeverContract.methods.getTemperature().call()    .then((resp) => {
+    return this.FeverContract.methods.getTemperature().call()
+      .then((resp) => {
       console.log(resp)
       return resp
     }).catch((err) => {
@@ -199,7 +203,7 @@ class FeverContract {
       console.log(hash)
       this.loading = true
     })
-    .then((resp) => {
+      .then((resp) => {
       this.loading = false
       console.log(resp)
       return resp
@@ -215,7 +219,7 @@ class FeverContract {
       console.log(hash)
       this.loading = true
     })
-    .then((resp) => {
+      .then((resp) => {
       this.loading = false
       console.log(resp)
       return resp

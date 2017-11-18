@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@aeternity/id-manager-provider": "0.0.4",
+    "@aeternity/id-manager-provider": "github:aeternity/id-manager-provider",
     "bignumber.js": "^4.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
