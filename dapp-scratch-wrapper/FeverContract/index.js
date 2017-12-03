@@ -43,8 +43,8 @@ class FeverContract {
 
       let web3Provider = false
       let idManager = new IdManagerProvider({
-        rpcUrl: 'http://localhost:9545',
-        skipSecurity: true
+        skipSecurity: true,
+        rpcUrl: 'http://localhost:9545'
       })
 
       idManager.checkIdManager().then((idManagerPresent)=>{
@@ -60,12 +60,14 @@ class FeverContract {
         } else if (this.options.connectionRetries > 0){
           this.options.connectionRetries -= 1
           setTimeout(() => {
+            console.log('try to connect again')
             this.initWeb3().then(resolve).catch((error) => {
               reject(new Error(error))
             })
           }, 1000)
           // revert to a read only version using infura endpoint
         } else {
+          console.log('app is in read only mode')
           this.readOnly = true
           web3Provider = ZeroClientProvider({
             getAccounts: function(){},
@@ -77,7 +79,7 @@ class FeverContract {
         }
 
         if (web3Provider) {
-          web3 = new Web3(web3Provider)
+          global.web3 = new Web3(web3Provider)
           this.startChecking()
 
           if (this.options.getPastEvents) this.getPastEvents()
