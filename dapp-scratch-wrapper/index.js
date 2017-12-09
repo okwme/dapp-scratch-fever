@@ -33,9 +33,7 @@ class ContractManager {
 
       let web3Provider = false
       let idManager = new IdManagerProvider({
-        rpcUrl: 'http://localhost:9545',
-        skipSecurity: true,
-
+        skipSecurity: true
       })
 
       idManager.checkIdManager().then((idManagerPresent)=>{
