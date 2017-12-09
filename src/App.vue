@@ -1,25 +1,30 @@
 <template>
   <div id="app">
     <div v-if="temp" id="temp" v-text="temp"></div>
-    <div @click="checkTemp()" class='emoji' v-text="emoji"></div>
+    <div @click="checkTemp()" class='emoji' :class='{rotate: loading}' v-text="emoji"></div>
     <div>
       <span class='emoji' @click="decreaseTemp()">❄️</span>
       <span class='emoji' @click="increaseTemp()">🔥</span>
     </div>
+    <small v-if="loading">confirming transaction</small>
   </div>
 </template>
 
 <script>
-import FeverContract from '../dapp-scratch-wrapper/FeverContract'
-let feverContract = new FeverContract()
-feverContract.helloWorld()
+import ContractManager from '../dapp-scratch-wrapper'
+let contractManager = new ContractManager()
+console.log(contractManager)
+// let contractManager.FeverContract = contractManager.FeverContract
+console.log(contractManager.FeverContract)
+// contractManager.FeverContract.helloWorld()
 
 export default {
   name: 'app',
   data () {
     return {
       hasFever: false,
-      temp: null
+      temp: null,
+      loading: false
     }
   },
   computed: {
@@ -27,26 +32,33 @@ export default {
       return this.temp && (this.temp > 110 || this.temp < 95) ? '💀' : (this.hasFever ? '🤒' : '😀')
     }
   },
+  mounted () {
+    setTimeout(this.checkTemp, 2500)
+  },
   methods: {
     getAccount () {
-      console.log(feverContract.account)
+      console.log(contractManager.FeverContract.account)
     },
     checkTemp () {
-      return feverContract.hasFever().then((hasFever) => {
+      return contractManager.FeverContract.hasFever().then((hasFever) => {
         this.hasFever = hasFever
-        return feverContract.getTemperature().then((temp) => {
+        return contractManager.FeverContract.getTemperature().then((temp) => {
           this.temp = temp
         })
       })
     },
     increaseTemp () {
-      return feverContract.increaseTemp().then((temp) => {
-        return this.checkTemp()
+      this.loading = true
+      return contractManager.FeverContract.increaseTemp().then((temp) => {
+        this.loading = false
+        return setTimeout(this.checkTemp, 2500)
       })
     },
     decreaseTemp () {
-      return feverContract.decreaseTemp().then((temp) => {
-        return this.checkTemp()
+      this.loading = true
+      return contractManager.FeverContract.decreaseTemp().then((temp) => {
+        this.loading = true
+        return setTimeout(this.checkTemp, 2500)
       })
     }
   }
@@ -78,4 +90,12 @@ body {
   font-size:120px;
   cursor: pointer;
 }
+.rotate {
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>
