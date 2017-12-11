@@ -18,6 +18,7 @@ class ContractManager {
       autoInit: true,
       connectionRetries: 3
     }
+    this.network = null
     this.identityObservers = []
 
     Object.assign(this.options, options)
@@ -114,7 +115,9 @@ class ContractManager {
     console.log('deploy contracts')
     for (const contract in contracts) {
       if (contracts.hasOwnProperty(contract)) {
-        this[contract] = new contracts[contract](this)
+        this[contract] = new contracts[contract](this, {
+          network: this.network
+        })
       }
     }
   }

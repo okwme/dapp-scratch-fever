@@ -4,14 +4,20 @@ class FeverContract {
 
     this.contractManager = contractManager
     this.address = '0x4859336a9ecaf3a6fe0ca54f29c24016e3005232'
+    this.addresses = {
+      42: '0xcfea164e365b67ac221d61a099981790600b8dc5',
+      4: '0x4859336a9ecaf3a6fe0ca54f29c24016e3005232'
+    }
     this.options = {
       getPastEvents: false,
-      watchFutureEvents: false
+      watchFutureEvents: false,
+      network: 42
     }
     Object.assign(this.options, options)
 
     if (!this.address || this.address === 'REPLACE_WITH_CONTRACT_ADDRESS') return new Error('Please provide a contract address')
-    this.FeverContract = new global.web3.eth.Contract(FeverContractArtifacts.abi, this.address)
+    let address = this.addresses[this.options.network]
+    this.FeverContract = new global.web3.eth.Contract(FeverContractArtifacts.abi, address)
 
   }
 
