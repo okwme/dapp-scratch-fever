@@ -1,7 +1,16 @@
 <template>
   <div id="app">
     <div class="emoji" v-if="!accounts" @click="connect()">⚡️</div>
-    <div v-else @click="accounts = null">{{accounts}}</div>
+    <div v-else @click="accounts = null">
+        <li v-for="(account) in accounts" :key="account">
+          <b>{{account}}</B>: {{balances[account]}}
+        </li>
+<!--
+      <div v-for="accounts">{{accounts}}</div>
+      <div>{{allBalances}}</div> -->
+
+
+      </div>
     <div v-if="temp" id="temp" v-text="temp"></div>
     <div @click="checkTemp()" class='emoji' :class='{rotate: loading}' v-text="emoji"></div>
     <div>
@@ -23,7 +32,8 @@ export default {
       hasFever: false,
       temp: null,
       loading: false,
-      accounts: null
+      accounts: null,
+      balances: {}
     }
   },
   computed: {
@@ -39,6 +49,32 @@ export default {
       var accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       this.accounts = accounts
       console.log({accounts})
+      this.getBalances()
+    },
+    getBalances() {
+      for (let i = 0; i < this.accounts.length; i++) {
+        this.getBalance(i)
+      }
+    },
+    getBalance(i) {
+      let account = this.accounts[i]
+      ethereum
+      .request({
+        method: 'eth_getBalance',
+        params: [
+        account,
+        'latest'
+      ],
+      })
+      .then((result) => {
+        this.balances[account] = result
+        // The result varies by by RPC method.
+        // For example, this method will return a transaction hash hexadecimal string on success.
+      })
+      .catch((error) => {
+        console.error({error})
+        // If the request fails, the Promise will reject with an error.
+      });
     },
     getAccount () {
 
