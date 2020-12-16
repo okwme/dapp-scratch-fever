@@ -22,8 +22,14 @@
 </template>
 
 <script>
+var Web3 = require('web3');
+var {abi, contractName, networks} = require("../build/contracts/FeverContract.json")
 
+console.log({abi, contractName, networks})
+
+var web3, contract
 var ethereum = window.ethereum
+
 export default {
   name: 'app',
   data () {
@@ -33,6 +39,8 @@ export default {
       temp: null,
       loading: false,
       accounts: null,
+      network: null,
+      chainId: null,
       balances: {}
     }
   },
@@ -49,7 +57,16 @@ export default {
       var accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       this.accounts = accounts
       console.log({accounts})
+
+      this.chainId = ethereum.chainId
+      this.network = parseInt(await ethereum.request({ method: 'net_version'}), 16)
+
       this.getBalances()
+
+      web3 = new Web3(ethereum);
+
+      contract = new web3.eth.Contract(abi, networks[this.network])
+      console.log({contract})
     },
     getBalances() {
       for (let i = 0; i < this.accounts.length; i++) {
@@ -67,7 +84,9 @@ export default {
       ],
       })
       .then((result) => {
-        this.balances[account] = result
+        this.$set(this.balances, account, result)
+        // this.balances[account] = result
+
         // The result varies by by RPC method.
         // For example, this method will return a transaction hash hexadecimal string on success.
       })
