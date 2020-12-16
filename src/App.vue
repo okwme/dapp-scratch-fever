@@ -58,14 +58,20 @@ export default {
       this.accounts = accounts
       console.log({accounts})
 
-      this.chainId = ethereum.chainId
-      this.network = parseInt(await ethereum.request({ method: 'net_version'}), 16)
+      this.chainId = parseInt(ethereum.chainId, 16)
+      this.network = parseInt(await ethereum.request({ method: 'net_version'}), 10)
 
       this.getBalances()
 
       web3 = new Web3(ethereum);
-
-      contract = new web3.eth.Contract(abi, networks[this.network])
+      console.log({networks})
+      console.log({this_networ: this.network})
+      if (!networks[this.network]) {
+        alert("contract not deployed")
+      }
+      var address = networks[this.network].address
+      console.log({address})
+      contract = new web3.eth.Contract(abi, address)
       console.log({contract})
     },
     getBalances() {
@@ -98,14 +104,18 @@ export default {
     getAccount () {
 
     },
-    checkTemp () {
-
+    async checkTemp () {
+      this.temp = await contract.methods.getTemperature().call()
     },
-    increaseTemp () {
+    async increaseTemp () {
       console.log('increase clicked!')
+      var result = await contract.methods.increaseTemp().send({from: this.accounts[0]})
+      console.log({result})
     },
-    decreaseTemp () {
+    async decreaseTemp () {
       console.log('decreased clicked!')
+      var result = await contract.methods.decreaseTemp().send({from: this.accounts[0]})
+      console.log({result})
     }
   }
 }
